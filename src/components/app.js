@@ -4,6 +4,10 @@ import { Questions } from './questions'
 import { QuestionDetails } from './question-details'
 import { apiBaseUrl } from '../constants/constants'
 
+// In QuestionDetails, on voting, the voting figrues should be updated, meaning that the
+//		state in app.js needs to be refreshed from the API
+// PropTypes
+
 export const App = () => {
 
 	const [ questions, setQuestions ] = useState([])
