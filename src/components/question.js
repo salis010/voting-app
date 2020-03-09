@@ -1,6 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { H3, Text } from './common'
+import { getQuestionNumberFromUrl } from '../utils/get-question-number-from-url'
 
 const QuestionWrapper = styled.div`
   display: flex;
@@ -13,9 +15,17 @@ const QuestionWrapper = styled.div`
   cursor: pointer;
 `
 
-export const Question = ({ question }) =>
-  <QuestionWrapper>
-    <H3>{question.question}</H3>
-    <Text>Published on: {new Date(question.published_at).toLocaleDateString()}</Text>
-    <Text>Choice of: {question.choices.length}</Text>
-  </QuestionWrapper>
+export const Question = ({ question }) => {
+
+  const questionNumber = getQuestionNumberFromUrl(question.url, '/')
+
+  return (
+    <Link to={`/questions:${questionNumber}`}>
+      <QuestionWrapper>
+        <H3>{question.question}</H3>
+        <Text>Published on: {new Date(question.published_at).toLocaleDateString()}</Text>
+        <Text>Choice of: {question.choices.length}</Text>
+      </QuestionWrapper>
+    </Link>
+  )
+}

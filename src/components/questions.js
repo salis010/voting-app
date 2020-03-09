@@ -5,6 +5,7 @@ import { H2 } from './common'
 
 const QuestionsWrapper = styled.div`
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 `
 

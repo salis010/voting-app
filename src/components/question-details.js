@@ -1,8 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import { apiBaseUrl } from '../constants/constants'
 import { H2, H3, Text } from './common'
+import { getQuestionNumberFromUrl } from '../utils/get-question-number-from-url'
+import { getQuestion } from '../utils/get-question'
 import { getTotalVotes } from '../utils/get-total-votes'
 import { getPercentageOfVotes } from '../utils/get-percentage-of-votes'
+
 
 const QuestionDetailsWrapper = styled.div`
   display: flex;
@@ -44,8 +48,28 @@ const Button = styled.button`
   }
 `
 
-export const QuestionDetails = ({ question }) => {
+export const QuestionDetails = ({ questions }) => {
+
+  const questionNumber = getQuestionNumberFromUrl(window.location.href, ':')
+  const question = getQuestion(questions, questionNumber)
   const totalVotes = getTotalVotes(question.choices)
+  const url = `${apiBaseUrl}/questions/8/choices/31`
+
+  const handleClick = () => {
+    fetch(url, {
+      method: 'POST',
+    })
+    .then(response => {
+      if(response.ok) {
+        console.log('OK')
+        // const newShipmentsData = getUpdatedShipmentsData(shipments.data, shipmentId, newName)
+        // setShipments({ ...shipments, data: newShipmentsData })
+      } else {
+        console.log('NOT OK')
+        // notify user: not implmented
+      }
+    })
+  }
 
   return (
     <>
@@ -62,7 +86,9 @@ export const QuestionDetails = ({ question }) => {
             </VotingOption>
           )}
         </Ul>
-        <ButtonWrapper><Button>Vote</Button></ButtonWrapper>
+        <ButtonWrapper>
+          <Button onClick={handleClick}>Vote</Button>
+        </ButtonWrapper>
       </QuestionDetailsWrapper>
     </>
   )
