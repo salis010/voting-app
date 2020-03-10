@@ -1,8 +1,13 @@
 export const theme = {
   colors: {
-    h2Color: 'RGB(100, 100, 100)',
-    h3Color: 'RGB(150, 150, 150)',
-    tableBorderColor: 'RGB(230, 230, 250)',
+    primary: 'tomato',
+    primaryHover: 'RGB(255, 70, 57)',
+    h2Color: 'RGB(80, 80, 80)',
+    h3Color: 'RGB(90, 90, 90)',
+    text: 'RGB(100, 100, 100)',
+    tableAlternateColor: 'RGB(245, 245, 245)',
   },
   borderRadius: '0.2rem',
+  paddingH: '1rem',
+  breakpoints: ['55rem']
 }

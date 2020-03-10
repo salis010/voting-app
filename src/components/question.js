@@ -1,18 +1,23 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { H3, Text } from './common'
+import { H3, Text, Link } from './common'
 import { getQuestionNumberFromUrl } from '../utils/get-question-number-from-url'
 
 const QuestionWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 15rem;
+  display: grid;
+  grid-template-row: 10rem 3rem 3rem;
+  width: 16rem;
+  height: 12rem;
+  box-sizing: border-box;
   padding: 1rem;
   margin: 1rem;
-  border: 1px solid ${props => props.theme.colors.tableBorderColor};
+  border: 1px solid ${props => props.theme.colors.primary};
   border-radius: ${props => props.theme.borderRadius};
   cursor: pointer;
+
+  &:hover {
+    border-width: 2px;
+  }
 `
 
 export const Question = ({ question, setshowQuestionDetails }) => {

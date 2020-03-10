@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Question } from './question'
-import { H2 } from './common'
+import { H2Wrapper, H2 } from './common'
 
 const QuestionsWrapper = styled.div`
   display: flex;
@@ -12,7 +12,9 @@ const QuestionsWrapper = styled.div`
 export const Questions = ({ questions, setshowQuestionDetails, setSelectedQuestion }) => {
   return (
     <>
-      <H2>Questions</H2>
+      <H2Wrapper>
+        <H2>Questions</H2>
+      </H2Wrapper>
       <QuestionsWrapper>
         {questions.map(question =>
           <Question

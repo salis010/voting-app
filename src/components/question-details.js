@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import styled from 'styled-components'
-import { H2, H3, Text, Button } from './common'
+import { H2, H2Wrapper, H3, Text, Button, ImageWrapper } from './common'
 import { getQuestionNumberFromUrl } from '../utils/get-question-number-from-url'
 import { getQuestion } from '../utils/get-question'
 import { getTotalVotes } from '../utils/get-total-votes'
@@ -13,28 +13,33 @@ const QuestionDetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 25rem;
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints[0]}) {
+    width: 95%;
+  }
 `
 
 const Ul = styled.ul`
   padding: 0;
-  border: 1px solid ${props => props.theme.colors.tableBorderColor};
+  border: 1px solid ${props => props.theme.colors.primary};
+  border-radius: ${props => props.theme.borderRadius};
 `
 
 const VotingOption = styled.div`
   display: grid;
   grid-template-columns: 4fr 1fr 1fr 1fr;
-  border: ${props => props.theme.colors.tableBorderColor};
+  padding: 0 ${props => props.theme.paddingH};
+  border: ${props => props.theme.colors.primary};
   cursor: pointer;
 
   &:nth-child(2n) {
-    background: ${props => props.theme.colors.tableBorderColor};
+    background-color: ${props => props.theme.colors.tableAlternateColor};
   }
-`
 
-const ImageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  &last-child: {
+    border-radius: ${props => props.theme.borderRadius};
+    margin-bottom:2px;
+  }
 `
 
 const ButtonWrapper = styled.div`
@@ -66,12 +71,16 @@ export const QuestionDetails = ({ questions, voteHandler }) => {
       voteHandler(questionNumber, selectedOption)
 
       setRedirectToHome(true)
+    } else {
+      alert('Select an option')
     }
   }
 
   return (
     <>
-      <H2>Question Details</H2>
+      <H2Wrapper>
+        <H2>Question Details</H2>
+      </H2Wrapper>
       <QuestionDetailsWrapper>
         <H3>Question: {question.question}</H3>
         <Ul>

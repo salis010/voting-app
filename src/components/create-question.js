@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { apiBaseUrl } from '../constants/constants'
-import { Button } from './common'
+import { H2Wrapper, H2, Button } from './common'
 import { allOptionsHaveText } from '../utils/all-options-have-text'
 
 const Wrapper = styled.div`
@@ -16,11 +16,20 @@ const FormWrapper = styled.div`
 `
 
 const Label = styled.label`
-
+  color: ${props => props.theme.colors.text};
+  margin-bottom: 0.5rem;
 `
 
 const Input = styled.input`
+  margin-bottom: 1rem;
+  text-indent: 1rem;
+  border: 1px solid ${props => props.theme.colors.text};
+  border-radius: ${props => props.theme.borderRadius};
+`
 
+const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 
 export const CreateQuestion = () => {
@@ -72,15 +81,20 @@ export const CreateQuestion = () => {
   }
 
   return (
-    <Wrapper>
+      <>
+      <H2Wrapper>
+        <H2>Create Question</H2>
+      </H2Wrapper>
       <FormWrapper>
         <Label>Enter the new question here:</Label>
         <Input value={question} onChange={handleQuestionChange}/>
-        <Label>Enter the options here:</Label>
+        <Label>Press 'Add Option':</Label>
         {options.map((option, i) => <Input key={i} id={i} onChange={handleOptionChange} />)}
-        <Button onClick={handleAddOption}>Add Option</Button>
-        <Button onClick={handleSubmitQuestion}>Submit Question</Button>
+        <ButtonsWrapper>
+          <Button onClick={handleAddOption}>Add Option</Button>
+          <Button onClick={handleSubmitQuestion}>Submit Question</Button>
+        </ButtonsWrapper>
       </FormWrapper>
-    </Wrapper>
+    </>
   )
 }

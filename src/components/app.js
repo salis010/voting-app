@@ -5,7 +5,9 @@ import { Questions } from './questions'
 import { QuestionDetails } from './question-details'
 import { CreateQuestion } from  './create-question'
 import { apiBaseUrl } from '../constants/constants'
+import { PageWrapper } from './common'
 
+// Styling
 // Cypress
 // Enzyme
 // PropTypes
@@ -44,12 +46,13 @@ export const App = () => {
 	return (
 		<Router>
 			<Header />
-
-			<Switch>
-				<Route exact path='/' render={() => <Questions questions={questions} />} />
-				<Route  path='/questions:id' render={() => <QuestionDetails questions={questions} voteHandler={voteHandler}/>} />
-				<Route  path='/create-question' component={CreateQuestion} />
-			</Switch>
+			<PageWrapper>
+				<Switch>
+					<Route exact path='/' render={() => <Questions questions={questions} />} />
+					<Route  path='/questions:id' render={() => <QuestionDetails questions={questions} voteHandler={voteHandler}/>} />
+					<Route  path='/create-question' component={CreateQuestion} />
+				</Switch>
+			</PageWrapper>	
 		</Router>
 	)
 }
