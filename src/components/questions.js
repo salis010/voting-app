@@ -1,4 +1,5 @@
 import React from 'react'
+import { PropTypes } from 'prop-types'
 import styled from 'styled-components'
 import { Question } from './question'
 import { H2Wrapper, H2 } from './common'
@@ -9,7 +10,7 @@ const QuestionsWrapper = styled.div`
   flex-wrap: wrap;
 `
 
-export const Questions = ({ questions, setshowQuestionDetails, setSelectedQuestion }) => {
+export const Questions = ({ questions }) => {
   return (
     <>
       <H2Wrapper>
@@ -20,10 +21,12 @@ export const Questions = ({ questions, setshowQuestionDetails, setSelectedQuesti
           <Question
             key={question.url}
             question={question}
-            setshowQuestionDetails={setshowQuestionDetails}
-            setSelectedQuestion={setSelectedQuestion}
           />)}
       </QuestionsWrapper>
     </>
   )
+}
+
+Questions.propTypes = {
+  questions: PropTypes.array.isRequired,
 }

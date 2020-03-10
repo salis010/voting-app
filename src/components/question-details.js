@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
+import { PropTypes } from 'prop-types'
 import styled from 'styled-components'
 import { H2, H2Wrapper, H3, Text, Button, ImageWrapper } from './common'
 import { getQuestionNumberFromUrl } from '../utils/get-question-number-from-url'
@@ -104,4 +105,9 @@ export const QuestionDetails = ({ questions, voteHandler }) => {
       </QuestionDetailsWrapper>
     </>
   )
+}
+
+QuestionDetails.propTypes = {
+  questions: PropTypes.array.isRequired,
+  voteHandler: PropTypes.func.isRequired,
 }

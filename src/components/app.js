@@ -7,10 +7,6 @@ import { CreateQuestion } from  './create-question'
 import { apiBaseUrl } from '../constants/constants'
 import { PageWrapper } from './common'
 
-// Cypress
-// Enzyme
-// PropTypes
-
 export const App = () => {
 
 	const [ questions, setQuestions ] = useState([])

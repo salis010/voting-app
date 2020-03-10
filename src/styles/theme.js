@@ -9,5 +9,5 @@ export const theme = {
   },
   borderRadius: '0.2rem',
   paddingH: '1rem',
-  breakpoints: ['55rem']
+  breakpoints: ['30rem']
 }

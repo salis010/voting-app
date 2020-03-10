@@ -22,10 +22,16 @@ const Label = styled.label`
 `
 
 const Input = styled.input`
+  width: 25rem;
   margin-bottom: 1rem;
   text-indent: 0.5rem;
   border: 1px solid ${props => props.theme.colors.text};
   border-radius: ${props => props.theme.borderRadius};
+  outline: none;
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints[0]}) {
+    width: 95%;
+  }
 `
 
 const ButtonsWrapper = styled.div`
@@ -75,10 +81,9 @@ export const CreateQuestion = () => {
       })
       .then(response => {
         if(response.ok) {
-          console.log('OK')
+          console.log('Question successfully created')
         } else {
-          console.log('Error: new question was not created')
-          // notify user: not implmented
+          alert('Error: new question was not created')
         }
       })
       setRedirectToHome(true)

@@ -1,4 +1,5 @@
 import React from 'react'
+import { PropTypes } from 'prop-types'
 import styled from 'styled-components'
 import { H3, Text, Link } from './common'
 import { getQuestionNumberFromUrl } from '../utils/get-question-number-from-url'
@@ -20,7 +21,7 @@ const QuestionWrapper = styled.div`
   }
 `
 
-export const Question = ({ question, setshowQuestionDetails }) => {
+export const Question = ({ question }) => {
 
   const questionNumber = getQuestionNumberFromUrl(question.url, '/')
 
@@ -33,4 +34,8 @@ export const Question = ({ question, setshowQuestionDetails }) => {
         </QuestionWrapper>
       </Link>
   )
+}
+
+Question.propTypes = {
+  question: PropTypes.object.isRequired,
 }
