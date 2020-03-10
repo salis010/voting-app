@@ -9,12 +9,18 @@ const QuestionsWrapper = styled.div`
   flex-wrap: wrap;
 `
 
-export const Questions = ({ questions }) => {
+export const Questions = ({ questions, setshowQuestionDetails, setSelectedQuestion }) => {
   return (
     <>
       <H2>Questions</H2>
       <QuestionsWrapper>
-        {questions.map(question => <Question key={question.url} question={question} />)}
+        {questions.map(question =>
+          <Question
+            key={question.url}
+            question={question}
+            setshowQuestionDetails={setshowQuestionDetails}
+            setSelectedQuestion={setSelectedQuestion}
+          />)}
       </QuestionsWrapper>
     </>
   )

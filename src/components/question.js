@@ -15,17 +15,17 @@ const QuestionWrapper = styled.div`
   cursor: pointer;
 `
 
-export const Question = ({ question }) => {
+export const Question = ({ question, setshowQuestionDetails }) => {
 
   const questionNumber = getQuestionNumberFromUrl(question.url, '/')
 
   return (
-    <Link to={`/questions:${questionNumber}`}>
-      <QuestionWrapper>
-        <H3>{question.question}</H3>
-        <Text>Published on: {new Date(question.published_at).toLocaleDateString()}</Text>
-        <Text>Choice of: {question.choices.length}</Text>
-      </QuestionWrapper>
-    </Link>
+      <Link to={`/questions:${questionNumber}`} >
+        <QuestionWrapper>
+          <H3>{question.question}</H3>
+          <Text>Published on: {new Date(question.published_at).toLocaleDateString()}</Text>
+          <Text>Choice of: {question.choices.length}</Text>
+        </QuestionWrapper>
+      </Link>
   )
 }

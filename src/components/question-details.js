@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
 import styled from 'styled-components'
-import { apiBaseUrl } from '../constants/constants'
-import { H2, H3, Text } from './common'
+import { H2, H3, Text, Button } from './common'
 import { getQuestionNumberFromUrl } from '../utils/get-question-number-from-url'
 import { getQuestion } from '../utils/get-question'
 import { getTotalVotes } from '../utils/get-total-votes'
@@ -42,49 +42,31 @@ const ButtonWrapper = styled.div`
   justify-content: flex-end;
 `
 
-const Button = styled.button`
-  width: 4rem;
-  height: 2rem;
-  background-color: ${props => props.theme.colors.tableBorderColor};
-  border: none;
-  border-radius: ${props => props.theme.borderRadius};
-  outline: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: blue;
-  }
-`
-
-export const QuestionDetails = ({ questions }) => {
+export const QuestionDetails = ({ questions, voteHandler }) => {
 
   const [ selectedOption, setSelectedOption ] = useState(0)
+  const [ redirectToHome, setRedirectToHome ] = useState(false)
+
+  if(redirectToHome) {
+     return <Redirect to='/' />
+  }
 
   const questionNumber = getQuestionNumberFromUrl(window.location.href, ':')
   const question = getQuestion(questions, questionNumber)
   const totalVotes = getTotalVotes(question.choices)
-  const url = `${apiBaseUrl}/questions/${questionNumber}/choices/${selectedOption}`
-
-  const voteHandler = () => {
-    fetch(url, {
-      method: 'POST',
-    })
-    .then(response => {
-      if(response.ok) {
-        console.log('OK')
-        // const newShipmentsData = getUpdatedShipmentsData(shipments.data, shipmentId, newName)
-        // setShipments({ ...shipments, data: newShipmentsData })
-      } else {
-        console.log('NOT OK')
-        // notify user: not implmented
-      }
-    })
-  }
 
   const selectOptionHandler = event => {
     const optionNumber = getQuestionNumberFromUrl(event.currentTarget.getAttribute('value'), '/')
 
     setSelectedOption(optionNumber)
+  }
+
+  const onVoteClick = () => {
+    if(selectedOption !== 0) {
+      voteHandler(questionNumber, selectedOption)
+
+      setRedirectToHome(true)
+    }
   }
 
   return (
@@ -108,7 +90,7 @@ export const QuestionDetails = ({ questions }) => {
           )}
         </Ul>
         <ButtonWrapper>
-          <Button onClick={voteHandler}>Vote</Button>
+          <Button onClick={onVoteClick}>Vote</Button>
         </ButtonWrapper>
       </QuestionDetailsWrapper>
     </>

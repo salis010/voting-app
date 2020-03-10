@@ -1,32 +1,54 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Header } from './header'
 import { Questions } from './questions'
 import { QuestionDetails } from './question-details'
+import { CreateQuestion } from  './create-question'
 import { apiBaseUrl } from '../constants/constants'
 
-// In QuestionDetails, on voting, the voting figrues should be updated, meaning that the
-//		state in app.js needs to be refreshed from the API
+// Cypress
+// Enzyme
 // PropTypes
 
 export const App = () => {
 
 	const [ questions, setQuestions ] = useState([])
+	const [ votes, setVotes ] = useState(0)
 
-	const url = `${apiBaseUrl}/questions`
+	const questionsUrl = `${apiBaseUrl}/questions`
 
 	useEffect(() => {
-		fetch(url)
+		fetch(questionsUrl)
 			.then(response => response.json())
 			.then(data => setQuestions(data))
-	}, [])
+	}, [votes])
+
+	const voteHandler = (questionNumber, selectedOption) => {
+		const voteUrl = `${apiBaseUrl}/questions/${questionNumber}/choices/${selectedOption}`
+
+		if(selectedOption !== 0) {
+			fetch(voteUrl, {
+	      method: 'POST',
+	    })
+	    .then(response => {
+	      if(response.ok) {
+					setVotes(votes + 1) // will trigger
+	      } else {
+	        console.log('Error: the vote was not saved')
+	        // notify user: not implmented
+	      }
+	    })
+		}
+	}
 
 	return (
 		<Router>
-			<h1>Polling Station</h1>
+			<Header />
 
 			<Switch>
 				<Route exact path='/' render={() => <Questions questions={questions} />} />
-				<Route  path='/questions:id' render={() => <QuestionDetails questions={questions} />} />
+				<Route  path='/questions:id' render={() => <QuestionDetails questions={questions} voteHandler={voteHandler}/>} />
+				<Route  path='/create-question' component={CreateQuestion} />
 			</Switch>
 		</Router>
 	)
