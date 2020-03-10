@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import { apiBaseUrl } from '../constants/constants'
 import { H2Wrapper, H2, Button } from './common'
@@ -22,7 +23,7 @@ const Label = styled.label`
 
 const Input = styled.input`
   margin-bottom: 1rem;
-  text-indent: 1rem;
+  text-indent: 0.5rem;
   border: 1px solid ${props => props.theme.colors.text};
   border-radius: ${props => props.theme.borderRadius};
 `
@@ -36,6 +37,11 @@ export const CreateQuestion = () => {
 
   const [question, setQuestion] = useState([])
   const [options, setOptions] = useState([])
+  const [ redirectToHome, setRedirectToHome ] = useState(false)
+
+  if(redirectToHome) {
+     return <Redirect to='/' />
+  }
 
   const handleQuestionChange = event => setQuestion(event.target.value)
 
@@ -75,6 +81,7 @@ export const CreateQuestion = () => {
           // notify user: not implmented
         }
       })
+      setRedirectToHome(true)
     } else {
       alert('Question should not be empty\nThere should be at least 2 options')
     }
@@ -87,12 +94,12 @@ export const CreateQuestion = () => {
       </H2Wrapper>
       <FormWrapper>
         <Label>Enter the new question here:</Label>
-        <Input value={question} onChange={handleQuestionChange}/>
+        <Input data-cy='input-question'value={question} onChange={handleQuestionChange}/>
         <Label>Press 'Add Option':</Label>
-        {options.map((option, i) => <Input key={i} id={i} onChange={handleOptionChange} />)}
+        {options.map((option, i) => <Input data-cy={'option' + i} key={i} id={i} onChange={handleOptionChange} />)}
         <ButtonsWrapper>
-          <Button onClick={handleAddOption}>Add Option</Button>
-          <Button onClick={handleSubmitQuestion}>Submit Question</Button>
+          <Button data-cy='add-option' onClick={handleAddOption}>Add Option</Button>
+          <Button data-cy='submit-question' onClick={handleSubmitQuestion}>Submit Question</Button>
         </ButtonsWrapper>
       </FormWrapper>
     </>

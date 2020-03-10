@@ -7,7 +7,6 @@ import { CreateQuestion } from  './create-question'
 import { apiBaseUrl } from '../constants/constants'
 import { PageWrapper } from './common'
 
-// Styling
 // Cypress
 // Enzyme
 // PropTypes
@@ -36,8 +35,7 @@ export const App = () => {
 	      if(response.ok) {
 					setVotes(votes + 1) // will trigger
 	      } else {
-	        console.log('Error: the vote was not saved')
-	        // notify user: not implmented
+	        alert('Error: the vote was not saved')
 	      }
 	    })
 		}
@@ -52,7 +50,7 @@ export const App = () => {
 					<Route  path='/questions:id' render={() => <QuestionDetails questions={questions} voteHandler={voteHandler}/>} />
 					<Route  path='/create-question' component={CreateQuestion} />
 				</Switch>
-			</PageWrapper>	
+			</PageWrapper>
 		</Router>
 	)
 }

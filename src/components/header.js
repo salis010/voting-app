@@ -29,11 +29,11 @@ const Button = styled.div`
 export const Header = () =>
   <Wrapper>
     <Link to='/'>
-      <ImageWrapper>
+      <ImageWrapper data-cy='home-icon'>
         <img src={home} alt='home' />
       </ImageWrapper>
     </Link>
     <Link to='/create-question'>
-      <Button>Create Question</Button>
+      <Button data-cy='create-question-button'>Create Question</Button>
     </Link>
   </Wrapper>

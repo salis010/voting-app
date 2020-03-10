@@ -82,7 +82,7 @@ export const QuestionDetails = ({ questions, voteHandler }) => {
         <H2>Question Details</H2>
       </H2Wrapper>
       <QuestionDetailsWrapper>
-        <H3>Question: {question.question}</H3>
+        <H3>{question.question}</H3>
         <Ul>
           {question.choices.map(option =>
             <VotingOption key={option.choice} value={option.url} onClick={selectOptionHandler}>
